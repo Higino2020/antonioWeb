@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Imagem;
 use Illuminate\Http\Request;
+use Plank\Mediable\Facades\MediaUploader;
 
 class ImagemController extends Controller
 {
@@ -28,15 +29,36 @@ class ImagemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $imagem = null;
+        $sms = "";
+        if(isset($request->id)){
+            $imagem = Imagem::find($request->id);
+            $sms = 'Imagem actualizado com exito';
+        }else{
+            $imagem = new Imagem();
+            $sms = 'Produto cadastrado com exito';
+        }
+        if (request()->hasFile('imagem')) {
+            $media = MediaUploader::fromSource(request()->file('imagem'))
+                ->toDirectory('produto')->onDuplicateIncrement()
+                ->useHashForFilename()
+                ->setAllowedAggregateTypes(['image'])->upload();
+            $imagem->imagem = $media->basename;
+        }
+        $imagem->produto_id = $request->produto_id;
+        $imagem->save();
+        return redirect()->back()->with('Sucesso', $sms);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Imagem $imagem)
+    public function show($id)
     {
-        //
+        $imga = Imagem::find($id);
+        $imga->delete();
+        $sms = 'Imagem de produto Eliminado com exito';
+        return redirect()->back()->with('Sucesso', $sms);
     }
 
     /**

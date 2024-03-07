@@ -7,40 +7,47 @@ use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return view('admin.categoria');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $area = null;
+        if(!isset($request->id)){
+            $area = new Categoria();
+        }else{
+            $area = Categoria::find($request->id);
+        }
+        $area->titulo = $request->titulo;
+        $area->descricao = $request->descricao;
+        $area->save();
+        return redirect()->back()->with("Sucesso","Categoria Inserida com exito");
     }
 
     /**
      * Display the specified resource.
+     *
+     * @param  \App\Models\Categoria  $categoria
+     * @return \Illuminate\Http\Response
      */
-    public function show(Categoria $categoria)
+    public function show($categoria)
     {
-        //
+        Categoria::find($categoria)->delete();
+        return redirect()->back()->with("Sucesso","Categoria Apagada com exito");
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Categoria  $categoria
+     * @return \Illuminate\Http\Response
      */
     public function edit(Categoria $categoria)
     {
@@ -49,6 +56,10 @@ class CategoriaController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Categoria  $categoria
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Categoria $categoria)
     {
@@ -57,6 +68,9 @@ class CategoriaController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Categoria  $categoria
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Categoria $categoria)
     {

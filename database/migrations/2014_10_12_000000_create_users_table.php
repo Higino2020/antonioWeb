@@ -17,9 +17,16 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('tipo');
             $table->rememberToken();
             $table->timestamps();
         });
+        App\Models\User::create([
+            'name' =>  'admin geral',
+            'email' => 'admin@geral.com',
+            'password' => bcrypt('123456789'),
+            'tipo' => 'Admin'
+        ]);
     }
 
     /**

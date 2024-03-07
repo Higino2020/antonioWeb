@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -12,7 +13,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        return view();
     }
 
     /**
@@ -28,15 +29,40 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = null;
+        $cliente = null;
+        if(!isset($request->id)){
+            $cliente = new Cliente();
+            $user  = User::create([
+                'name' =>$request->nome,
+                'email' => $request->email,
+                'tipo' => 'Cliente',
+                'password' => bcrypt('1234Cliente')
+            ]);
+            $cliente->id_user = $user->id;
+        }else{
+            $cliente = Cliente::find($request->id);
+        }
+
+        $cliente->nome = $request->nome;
+        $cliente->provincia = $request->provincia;
+        $cliente->municipio = $request->municipio;
+        $cliente->zona = $request->zona;
+        $cliente->bairro = $request->bairro;
+        $cliente->telefone = $request->telefone;
+        $cliente->email = $request->email;
+        $cliente->save();
+        return redirect()->back()->with('Sucesso','Cliente Inserido com exito');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Cliente $cliente)
+    public function show($id)
     {
-        //
+        $cliente = Cliente::find($id);
+        $cliente->delete();
+        return redirect()->back()->with('Sucesso','Cliente eliminado com exito');
     }
 
     /**

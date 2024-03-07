@@ -28,7 +28,19 @@ class EncomendaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $encomenda = null;
+        if(!isset($request->id)){
+            $encomenda = new Encomenda();
+        }else{
+            $encomenda = Encomenda::find($request->id);
+        }
+        $encomenda->qtd = $request->qtd;
+        $encomenda->produto_id = $request->produto_id;
+        $encomenda->user_id = $request->user_id;
+        $encomenda->data_entrega = $request->data_entrega;
+        $encomenda->estado = "Em Analise";
+        $encomenda->save();
+        return redirect()->back()->with('Sucesso','encomenda Inserido com exito');
     }
 
     /**
