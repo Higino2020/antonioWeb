@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('patrimonio')
+@section('antonio')
 <div class="main-content">
   <section class="section">
     <div class="row ">
@@ -106,7 +106,7 @@
                   <th>Funcionario</th>
                   <th>Data da entrada</th>
                 </tr>
-                @foreach (App\Models\Entrada::whereMonth('data',date('m'))->get() as $item)
+                @foreach (App\Models\Entrada::whereMonth('data_entrada',date('m'))->get() as $item)
                   <tr>
                     <td>{{$item->material->nome}}</td>
                     <td class="align-middle">
@@ -147,7 +147,7 @@
           <div class="card-header">
             <h4>Categoria</h4>
             <form class="card-header-form">
-              <a href="{{route('cate.index')}}" class="btn btn-primary">Ver todos</a>
+              <a href="" class="btn btn-primary">Ver todos</a>
             </form>
           </div>
           <div class="card-body">
@@ -162,7 +162,7 @@
             @endforeach
          
           </div>
-          <a href="{{route('cate.index')}}" class="card-footer card-link text-center small ">ver
+          <a href="" class="card-footer card-link text-center small ">ver
             todos
           </a>
         </div>
@@ -185,14 +185,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach (App\Models\Saida::whereMonth('data',date('m'))->limit(4)->get() as $item)
+                  @foreach (App\Models\Saida::whereMonth('data_saida',date('m'))->limit(4)->get() as $item)
                     <tr>
                       <td>{{$item->material->nome}}</td>
                       <td class="align-middle">
                           {{$item->qtd}}
                       </td>
                       <td>
-                          {{$item->data}}
+                          {{$item->data_saida}}
                       </td>
                       <td>
                           <a href="#" class="text-info"><i data-feather="edit"></i></a>

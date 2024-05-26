@@ -14,7 +14,7 @@ class EntradaController extends Controller
     public function index()
     {
         $entrada = Entrada::orderBy('id','DESC')->get();
-        return view('pages.entrada', compact('entrada'));
+        return view('admin.entrada', compact('entrada'));
     }
 
     /**

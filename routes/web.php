@@ -60,7 +60,7 @@ Route::get('getfile/{name}',function($name){
 
 
 
-Route::group(['prefixe'=>'admin'],function(){
+Route::group(['prefix'=>'admin'],function(){
     Route::get('',function(){
         return view('admin.index');
     })->name('admin.inicio');

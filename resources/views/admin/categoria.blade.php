@@ -1,5 +1,5 @@
-@extends('layouts.base')
-@section('patrimonio')
+@extends('layouts.admin')
+@section('antonio')
     <div class="main-content">
         <div class="section">
             <div class="row">
@@ -36,12 +36,12 @@
                         @php
                                 $i = 1
                             @endphp
-                            @foreach (App\Models\Categoria::orderBy('titulo','ASC')->get() as $item)
+                            @foreach (App\Models\Categoria::orderBy('nome','ASC')->get() as $item)
                                 <tr>
                                     <td class="p-0 text-center">
                                         {{$i++}}
                                     </td>
-                                    <td>{{$item->titulo}}</td>
+                                    <td>{{$item->nome}}</td>
                                     <td>
                                         {{$item->descricao}}
                                     </td>
@@ -66,7 +66,7 @@
     <script>
         function editar(valor) {
             document.getElementById('id').value = valor.id;
-            document.getElementById('titulo').value = valor.titulo;
+            document.getElementById('nome').value = valor.nome;
             document.getElementById('descricao').value = valor.descricao;
         }
     </script>
@@ -81,13 +81,13 @@
                         <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close"> <i data-feather="x-circle"></i> </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('cate.store')}}" method="post">
+                    <form action="{{route('categoria.store')}}" method="post">
                         @csrf
                         <input type="hidden" id="id" name="id">
                         <div class="form-group">
                             <label>Titulo da Categoria</label>
                             <div class="input-group">
-                              <input type="text" class="form-control phone-number" name="titulo" id="titulo">
+                              <input type="text" class="form-control phone-number" name="nome" id="titulo">
                             </div>
                           </div>
                         <div class="form-group">

@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Esc. 1008</title>
+  <title>Antonio e Filhos</title>
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{asset('assets/css/app.min.css')}}">
   <!-- Template CSS -->
@@ -31,7 +31,7 @@
                 <i data-feather="maximize"></i>
               </a></li>
             <li>
-              <form class="form-inline mr-auto" action="{{route('material.consultarAll')}}" method="post">
+              <form class="form-inline mr-auto" action="" method="post">
                 @csrf
                 <div class="search-element">
                   <input class="form-control" type="search" name="valor" placeholder="pesquisa pelo nome ou codigo do material" aria-label="Search" data-width="200">
@@ -47,8 +47,8 @@
           <li class="dropdown"><a href="" data-toggle="dropdown"
               class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <i data-feather="user"></i>> <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
-              <div class="dropdown-title">{{Auth::user()->name}}</div>
-              <a href="{{route('perfil')}}" class="dropdown-item has-icon"> <i class="far
+              {{-- <div class="dropdown-title">{{Auth::user()->name}}</div> --}}
+              <a href="" class="dropdown-item has-icon"> <i class="far
 										fa-user"></i> Perfil
               </a> 
               <div class="dropdown-divider"></div>
@@ -67,35 +67,31 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="{{route('inicio')}}"> <span class="logo-name" style="font-size: 12px">Esc. 1008</span>
+            <a href="{{route('admin.inicio')}}"> <span class="logo-name" style="font-size: 12px">Antonio e Filhos</span>
             </a>
           </div>
           <ul class="sidebar-menu">
             <li class="menu-header">Menu</li>
             <li class="dropdown active">
-              <a href="{{route('inicio')}}" class="nav-link"><i data-feather="monitor"></i><span>Inicio</span></a>
+              <a href="{{route('admin.inicio')}}" class="nav-link"><i data-feather="monitor"></i><span>Inicio</span></a>
             </li>
-            @if(Auth::user()->tipo =="Admin")
-            <li class="dropdown">
+            {{-- @if(Auth::user()->tipo =="Admin") --}}
+            {{-- <li class="dropdown">
               <a href="{{route('user')}}" class="menu-toggle nav-link"><i data-feather="users"></i><span>Usuarios</span></a>
             </li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="briefcase"></i><span>Areas</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="{{route('area.index')}}">Secções</a></li>
-                <li><a class="nav-link" href="{{route('funcio.index')}}">Funcionarios</a></li>
+                <li><a class="nav-link" href="{{route('cliente.index')}}">Cliente</a></li>
               </ul>
             </li>
-            @endif
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="mail"></i><span>Bens</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="{{route('cate.index')}}">Categoria</a></li>
-                <li><a class="nav-link" href="{{ route('material.index') }}">Materias</a></li>
-                <li><a class="nav-link" href="{{ route('entradas.index') }}">Entradas</a></li>
-                <li><a class="nav-link" href="{{route('saidas.index')}}">Saidas</a></li>
-              </ul>
-            </li>
+             @endif --}}
+            
+            <li><a class="nav-link" href="{{route('categoria.index')}}">Categoria</a></li>
+            <li><a class="nav-link" href="{{ route('produto.index') }}">Produtos/Serviços</a></li>
+            <li><a class="nav-link" href="{{ route('entrada.index') }}">Entradas</a></li>
+           
             <li class="menu-header">Relatórios</li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="edit"></i><span>Entradas</span></a>
@@ -114,11 +110,11 @@
         </aside>
       </div>
       <!-- Main Content -->
-      @include('pages.consultar');
-      @yield('patrimonio')
+      {{-- @include('pages.consultar'); --}}
+      @yield('antonio')
       <footer class="main-footer">
         <div class="footer-left">
-          <a href="templateshub.net">Patrimonio</a></a>
+          <a href="templateshub.net">Admin Antonio</a></a>
         </div>
         <div class="footer-right">
         </div>

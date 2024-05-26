@@ -1,5 +1,5 @@
-@extends('layouts.base')
-@section('patrimonio')
+@extends('layouts.admin')
+@section('antonio')
     <div class="main-content">
         <div class="section">
             <div class="row">
@@ -41,7 +41,7 @@
                             @php
                                 $i=1
                             @endphp
-                            @foreach (App\Models\Entrada::orderBy('data','DESC')->get() as $item)
+                            @foreach (App\Models\Entrada::orderBy('data_entrada','DESC')->get() as $item)
                                 <tr>
                                     <td class="p-0 text-center">
                                         {{$i++}}
@@ -69,7 +69,7 @@
                                     <td>
                                         <a href="#Cadastro" data-toggle="modal" onclick="editar({{$item}})" class="text-info"><i data-feather="edit"></i></a>
                                         @if(Auth::user()->tipo =="Admin")
-                                        <a href="{{route('entradas.show',$item)}}" class="text-danger"><i data-feather="trash"></i></a>
+                                        <a href="{{route('entrada.show',$item)}}" class="text-danger"><i data-feather="trash"></i></a>
                                         @endif
                                     </td>
                                 </tr>
@@ -104,14 +104,14 @@
                         <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close"> <i data-feather="x-circle"></i> </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('entradas.store')}}" method="post">
+                    <form action="{{route('entrada.store')}}" method="post">
                       @csrf
                       <input type="hidden" name="id" id="id">
                         <div class="form-group">
                             <label>Produto</label>
                             <div class="input-group">
                             <select name="id_material" id="id_material" class="form-control">
-                                @foreach (App\Models\Material::orderBy('nome','ASC')->get() as $prod)
+                                @foreach (App\Models\Produto::orderBy('nome','ASC')->get() as $prod)
                                     <option value="{{ $prod->id }}">{{ $prod->nome }}</option>
                                 @endforeach
                               </select>

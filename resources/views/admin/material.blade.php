@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('patrimonio')
+@section('antonio')
     <div class="main-content">
         <div class="section">
             <div class="row">
@@ -98,7 +98,7 @@
                         <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close"> <i data-feather="x-circle"></i> </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('Produto.store')}}" method="post">
+                    <form action="{{route('produto.store')}}" method="post">
                       @csrf
                       <input type="hidden" name="id" id="id">
                         <div class="form-group">

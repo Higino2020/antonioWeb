@@ -158,7 +158,7 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="{{route('inicio')}}">Inicio</a></li>
-						<li><a href="{{route('produto')}}">Produto</a></li>
+						<li><a href="{{route('produto')}}">Produtos</a></li>
 						<li><a href="#">Categorias</a></li>
 						<li><a href="#">Verduras</a></li>
 					</ul>
