@@ -47,9 +47,9 @@
                                     </td>
                                     <td>
                                         <a href="#Cadastro" data-toggle="modal" onclick="editar({{$item}})" class="text-info"><i data-feather="edit"></i></a>
-                                        @if(Auth::user()->tipo =="Admin")
-                                        <a href="{{route('cate.show',$item)}}" class="text-danger"><i data-feather="trash"></i></a>
-                                        @endif
+                                        {{-- @if(Auth::user()->tipo =="Admin") --}}
+                                        <a href="{{route('categoria.show',$item)}}" class="text-danger"><i data-feather="trash"></i></a>
+                                        {{-- @endif --}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -69,6 +69,11 @@
             document.getElementById('nome').value = valor.nome;
             document.getElementById('descricao').value = valor.descricao;
         }
+        function limpar(valor) {
+            document.getElementById('id').value = "";
+            document.getElementById('nome').value = "";
+            document.getElementById('descricao').value = "";
+        }
     </script>
     {{-- Formulairo de cadastro de usuario --}}
     <!-- Modal trigger button -->
@@ -87,7 +92,7 @@
                         <div class="form-group">
                             <label>Titulo da Categoria</label>
                             <div class="input-group">
-                              <input type="text" class="form-control phone-number" name="nome" id="titulo">
+                              <input type="text" class="form-control phone-number" name="nome" id="nome">
                             </div>
                           </div>
                         <div class="form-group">

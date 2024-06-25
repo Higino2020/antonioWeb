@@ -13,20 +13,10 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        return view('admin.material');
+        return view('admin.produto');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
         $produto = null;
@@ -53,13 +43,12 @@ class ProdutoController extends Controller
         $produto->codigo = $request->codigo;
         $produto->nome = $request->nome;
         $produto->medicao = $request->medicao;
-        $produto->qtdaVender = 0;
         $produto->qtd = $request->qtd;
         $produto->preco = $request->preco;
         $produto->caducidade = $request->caducidade;
         $produto->perecivel = $request->perecivel;
         $produto->categoria_id = $request->categoria_id;
-
+        $produto->estado = "Em Análise";
         $produto->save();
         return redirect()->back()->with('Sucesso', $sms);
     }
@@ -73,6 +62,12 @@ class ProdutoController extends Controller
     {
         $produto  = Produto::find($produto)->delete();
         return redirect()->back()->with('Sucesso','Produto Eliminado com exito');
+    }
 
+    public function alter_estado($id,$estado){ 
+        $produto  = Produto::find($id);
+        $produto->estado = $estado;
+        $produto->save();
+        return redirect()->back()->with('Sucesso','Estado do Produto alterado com sucesso para '.$estado);
     }
 }

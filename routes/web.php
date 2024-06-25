@@ -72,6 +72,12 @@ Route::group(['prefix'=>'admin'],function(){
     Route::resource('categoria', CategoriaController::class);
     Route::resource('imagens', ImagemController::class);
 
+    Route::get('perfil',function(){
+        return view('admin.perfil');
+    })->name('perfil');
+
+    Route::get('produto/{id}/apagar',[ProdutoController::class,'apagar'])->name('produto.apagar');
+
 });
 
 Route::get('/',function(){
@@ -80,7 +86,10 @@ Route::get('/',function(){
 
 Route::get('produto',function(){
     return view('pages.product');
-})->name('produto');
+})->name('produto')->middleware('auth');
+
+
+
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

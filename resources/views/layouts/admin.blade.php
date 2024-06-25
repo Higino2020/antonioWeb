@@ -48,7 +48,7 @@
               class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <i data-feather="user"></i>> <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
               {{-- <div class="dropdown-title">{{Auth::user()->name}}</div> --}}
-              <a href="" class="dropdown-item has-icon"> <i class="far
+              <a href="{{route('perfil')}}" class="dropdown-item has-icon"> <i class="far
 										fa-user"></i> Perfil
               </a> 
               <div class="dropdown-divider"></div>

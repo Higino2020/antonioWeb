@@ -25,7 +25,7 @@ class CategoriaController extends Controller
         }else{
             $area = Categoria::find($request->id);
         }
-        $area->titulo = $request->titulo;
+        $area->nome = $request->nome;
         $area->descricao = $request->descricao;
         $area->save();
         return redirect()->back()->with("Sucesso","Categoria Inserida com exito");
