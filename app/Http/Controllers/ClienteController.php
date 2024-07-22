@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
 {
@@ -37,9 +38,9 @@ class ClienteController extends Controller
                 'name' =>$request->nome,
                 'email' => $request->email,
                 'tipo' => 'Cliente',
-                'password' => bcrypt('1234Cliente')
+                'password' => $request->password
             ]);
-            $cliente->id_user = $user->id;
+            $cliente->user_id = $user->id;
         }else{
             $cliente = Cliente::find($request->id);
         }
@@ -47,12 +48,19 @@ class ClienteController extends Controller
         $cliente->nome = $request->nome;
         $cliente->provincia = $request->provincia;
         $cliente->municipio = $request->municipio;
-        $cliente->zona = $request->zona;
+        $cliente->zona = "N/A";
         $cliente->bairro = $request->bairro;
         $cliente->telefone = $request->telefone;
         $cliente->email = $request->email;
         $cliente->save();
-        return redirect()->back()->with('Sucesso','Cliente Inserido com exito');
+
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect()->back();
+        }
+        return back()->withErrors([
+            'email' => 'As credenciais fornecidas não correspondem a nenhum usuário.',
+        ]);
     }
 
     /**

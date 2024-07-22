@@ -48,7 +48,7 @@
 					@else
 						<ul class="header-links pull-right">
 							<li><a href="#Login" data-toggle="modal"> Entrar</a></li>
-							<li><a href="#"> Cadastrar</a></li>
+							<li><a href="#Cadastrar" data-toggle="modal"> Cadastrar</a></li>
 						</ul>
 					@endif
 				</div>
@@ -248,6 +248,7 @@
 		</footer>
 		<!-- /FOOTER -->
 		@include('pages.auth.login')
+		@include('pages.auth.cadastrar')
 		<!-- jQuery Plugins -->
 		<script src="{{asset('js/jquery.min.js')}}"></script>
 		<script src="{{asset('js/bootstrap.min.js')}}"></script>

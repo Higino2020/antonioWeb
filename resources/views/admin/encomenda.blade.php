@@ -32,8 +32,8 @@
                                 <th>Produto</th>
                                 <th>Categoria</th>
                                 <th>Quantidade</th>
-                                <th>Data de Entrega</th>
                                 <th>Estado</th>
+                                <th>Data de Entrega</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -45,15 +45,21 @@
                                 <tr>
                                     <td>{{$i++}}</td>
                                     <td><img src="{{url('getfile/'.$encom->produto->foto.'?w=100')}}" alt="" class="img-fluid"></td>
-                                    <td style="display: flex; align-items: center;height: 100%">{{$encom->produto->nome}}</td>
+                                    <td class="align-middle">{{$encom->produto->nome}}</td>
                                     <td class="align-middle">{{$encom->produto->categoria->nome}}</td>
                                     <td class="align-middle">{{$encom->qtd}}</td>
-                                    <td class="align-middle">{{$encom->data_entrega}}</td>
                                     <td class="align-middle">{{$encom->estado}}</td>
-                                    <th>
-                                        <a href="" class="btn btn-success"><i class="fa fa-check"></i> Aceitar</a>
-                                        <a href="" class="btn btn-danger"><i class="fa fa-close"></i> Recusar</a>
-                                    </th>
+                                    <td class="align-middle">
+                                        @if($encom->estado != "Em Analise")
+                                            Entregue em 15 dias
+                                        @endif
+                                    </td>
+                                    @if($encom->estado == "Em Analise")
+                                        <th>
+                                            <a href="{{route('encom.aceite',$encom->id)}}" class="btn btn-success"><i class="fa fa-check"></i> Aceitar</a>
+                                            <a href="{{route('encom.rejeitar',$encom->id)}}" class="btn btn-danger"><i class="fa fa-close"></i> Recusar</a>
+                                        </th>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

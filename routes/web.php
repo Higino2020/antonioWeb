@@ -81,6 +81,13 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('produto/img',[ProdutoController::class,'imagens'])->name('produto.img');
     Route::post('actualizar',[UserController::class,'actualizar'])->name('user.actualizar');
     Route::post('senha',[UserController::class,'senha'])->name('user.senha');
+    
+    Route::resource('user',UserController::class);
+    Route::get('user/{id}/apagar',[UserController::class,'apagar'])->name('user.apagar');
+
+    Route::get('encomenda/{id}/aceitar',[EncomendaController::class,'aceitar'])->name('encom.aceite');
+    Route::get('encomenda/{id}/rejeitar',[EncomendaController::class,'rejeitar'])->name('encom.rejeitar');
+    Route::get('encomenda/{id}/confirmar',[EncomendaController::class,'confirmar'])->name('encom.confirmar');
 });
 
 Route::get('/',function(){
@@ -96,6 +103,7 @@ Route::get('produto/{id}/view',function($id){
 })->name('product.view');
 
 Route::post('entrar',[AuthController::class,'login'])->name('auth');
+Route::post('cadastrar',[ClienteController::class,'store'])->name('auth.store');
 Route::group(['middleware'=>'auth'],function(){
     Route::get('sair',[AuthController::class,'logout'])->name('sair');
     Route::get('minhaEncomenda',[EncomendaController::class,'minhaEncomenda'])->name('my');

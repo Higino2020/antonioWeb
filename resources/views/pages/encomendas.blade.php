@@ -36,11 +36,17 @@
                                     <td style="display: flex; align-items: center;height: 100%">{{$encom->produto->nome}}</td>
                                     <td class="align-middle">{{$encom->produto->categoria->nome}}</td>
                                     <td class="align-middle">{{$encom->qtd}}</td>
-                                    <td class="align-middle">{{$encom->data_entrega}}</td>
+                                    <td class="align-middle">
+                                        @if ($encom->estado == "Aceite")
+                                            Entregue em 15 dias
+                                        @endif
+                                    </td>
                                     <td class="align-middle">{{$encom->estado}}</td>
-                                    <th>
-                                        <a href="" class="btn btn-success"><i class="fa fa-check"></i> Confirmar</a>
-                                    </th>
+                                    @if ($encom->estado == "Aceite")
+                                        <th>
+                                            <a href="" class="btn btn-success"><i class="fa fa-check"></i> Confirmar</a>
+                                        </th>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

@@ -79,10 +79,11 @@
             </li>
              @endif --}}
             
+            <li><a class="nav-link" href="{{route('user.index')}}">Usuario</a></li>
             <li><a class="nav-link" href="{{route('categoria.index')}}">Categoria</a></li>
             <li><a class="nav-link" href="{{ route('produto.index') }}">Produtos/Serviços</a></li>
             <li><a class="nav-link" href="{{ route('entrada.index') }}">Entradas</a></li>
-            <li><a class="nav-link" href="{{ route('entrada.index') }}">Encomenda</a></li>
+            <li><a class="nav-link" href="{{ route('encomenda.index') }}">Encomenda</a></li>
           </ul>
         </aside>
       </div>

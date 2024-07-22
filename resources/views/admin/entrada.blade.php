@@ -53,7 +53,7 @@
                                         {{$item->produto->categoria->nome}}
                                     </td>
                                     <td>
-                                       {{Auth::user()->nome}}
+                                       {{Auth::user()->name}}
                                     </td>
                                     <td>
                                         {{$item->data_entrada}}

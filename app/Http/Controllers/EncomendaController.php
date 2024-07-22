@@ -13,7 +13,7 @@ class EncomendaController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.encomenda');
     }
 
     /**
@@ -53,5 +53,25 @@ class EncomendaController extends Controller
 
     public function minhaEncomenda(){
         return view('pages.encomendas',['encomenda'=>Encomenda::where('user_id',Auth::user()->id)->paginate(10)]);
+    }
+
+    public function aceitar($id){
+        $encomenda = Encomenda::find($id);
+        $encomenda->estado =  "Aceite";
+        $encomenda->save();
+        return redirect()->back();
+    }
+    public function rejeitar($id){
+        $encomenda = Encomenda::find($id);
+        $encomenda->estado =  "Recusado";
+        $encomenda->save();
+        return redirect()->back();
+    }
+
+    public function confirmar($id){
+        $encomenda = Encomenda::find($id);
+        $encomenda->estado =  "Confirmado";
+        $encomenda->save();
+        return redirect()->back();
     }
 }

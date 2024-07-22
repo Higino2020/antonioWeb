@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('estado');
             $table->foreignId('produto_id')->constrained('produtos')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->date('data_entrega');
+            $table->date('data_entrega')->nullable();
             $table->timestamps();
         });
     }
