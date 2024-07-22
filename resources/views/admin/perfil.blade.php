@@ -1,5 +1,5 @@
-@extends('layouts.base')
-@section('patrimonio')
+@extends('layouts.admin')
+@section('antonio')
 <div class="main-content" style="height: 100vh">
     <div class="section">
         <div class="row">

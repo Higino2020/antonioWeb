@@ -450,11 +450,18 @@ textarea.input {
 }
 
 .header-logo {
-  float: left;
+  display: flex;
+  align-items: end;
+  height: 50px;
+
 }
 
-.header-logo .logo img {
-  display: block;
+.header-logo .logo {
+  font-size: 25px;
+  color: #D10024;
+  span{
+    color: white !important;
+  }
 }
 
 /*----------------------------*\

@@ -28,8 +28,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nome do Produto</th>
                                 <th>Codigo de referencia</th>
+                                <th>Nome do Produto</th>
                                 <th>Perecivel</th>
                                 <th>Quantidade</th>
                                 <th>Categorias</th>
@@ -42,13 +42,15 @@
                             @endphp
                             @foreach (App\Models\Produto::orderBy('nome','ASC')->get() as $item)
                                 <tr>
+                                    
                                     <td class="p-0 text-center">
                                        <img src="{{url('getfile/'.$item->foto.'?w=100')}}" alt="" class="img-fluid">
                                     </td>
-                                    <td>{{$item->nome}}</td>
                                     <td class="align-middle">
                                         {{$item->codigo}}
                                     </td>
+                                    <td>{{$item->nome}}</td>
+                                   
                                     <td class="align-middle">
                                         {{$item->perecivel}}
                                     </td>
@@ -56,11 +58,12 @@
                                         {{$item->qtd}}
                                     </td>
                                     <td>
-                                        {{$item->categoria->titulo}}
+                                        {{$item->categoria->nome}}
                                     </td>
                                     <td>
                                         <a href="#Cadastro" data-toggle="modal" onclick="editar({{$item}})" class="text-info"><i data-feather="edit"></i></a>
                                         <a href="{{route('produto.show',$item)}}" title="Ver as Entradas e Requisições feitas" class="text-warning"><i data-feather="eye"></i></a>
+                                        <a href="#CadastroImg" data-toggle="modal" onclick="atribuir_produto_id({{$item->id}})" class="text-secondary"><i data-feather="file"></i></a>
                                         {{-- @if(Auth::user()->tipo =="Admin") --}}
                                         <a href="{{route('produto.apagar',$item)}}" class="text-danger"><i data-feather="trash"></i></a>
                                         {{-- @endif --}}
@@ -93,6 +96,9 @@
             document.getElementById('perecivel').value = "";
             document.getElementById('qtd').value = "";
             document.getElementById('id_categoria').value = "";
+        }
+        function atribuir_produto_id(valor) {
+            document.getElementById('produto_id').value = valor;
         }
     </script>
     {{-- Formulairo de cadastro de usuario --}}
@@ -193,6 +199,32 @@
                       
                         <div class="form-group">
                            <button type="submit" class="btn btn-success"><i data-feather="save"></i>  Cadastrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="CadastroImg" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="CadastroTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="CadastroTitulo">Cadastro Inserir Imagens do Produto</h5>
+                        <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close"> <i data-feather="x-circle"></i> </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('produto.img')}}" method="post" enctype="multipart/form-data">
+                      @csrf
+                        <input type="hidden" name="produto_id" id="produto_id">
+                        <div class="form-group">
+                            <label>Seleciones as imgens do Produto</label>
+                            <div class="input-group">
+                            <input type="file" multiple required class="form-control phone-number" name="fotos[]" accept="image/*" id="foto">
+                            </div>
+                        </div>
+                      
+                        <div class="form-group">
+                           <button type="submit" class="btn btn-success"><i data-feather="save"></i>Cadastrar</button>
                         </div>
                     </form>
                 </div>

@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Entrada extends Model
 {
     use HasFactory;
+    public function produto(){
+        return $this->belongsTo(Produto::class);
+    }
 }

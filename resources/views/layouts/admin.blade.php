@@ -25,21 +25,12 @@
       <nav class="navbar navbar-expand-lg main-navbar sticky">
         <div class="form-inline mr-auto">
           <ul class="navbar-nav mr-3">
-            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
-									collapse-btn"> <i data-feather="align-justify"></i></a></li>
-            <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
-                <i data-feather="maximize"></i>
-              </a></li>
             <li>
-              <form class="form-inline mr-auto" action="" method="post">
-                @csrf
-                <div class="search-element">
-                  <input class="form-control" type="search" name="valor" placeholder="pesquisa pelo nome ou codigo do material" aria-label="Search" data-width="200">
-                  <button class="btn" type="submit">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
-              </form>
+              <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg collapse-btn"> <i data-feather="align-justify"></i></a></li>
+            <li>
+              <a href="#" class="nav-link nav-link-lg fullscreen-btn">
+                <i data-feather="maximize"></i>
+              </a>
             </li>
           </ul>
         </div>
@@ -91,21 +82,7 @@
             <li><a class="nav-link" href="{{route('categoria.index')}}">Categoria</a></li>
             <li><a class="nav-link" href="{{ route('produto.index') }}">Produtos/Serviços</a></li>
             <li><a class="nav-link" href="{{ route('entrada.index') }}">Entradas</a></li>
-           
-            <li class="menu-header">Relatórios</li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="edit"></i><span>Entradas</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="#Consultar" data-toggle="modal" onclick="consultar('Entradas');">Por Material</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                  data-feather="shopping-bag"></i><span>Requisitadas</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="#Consultar" data-toggle="modal" onclick="consultar('Requisições');">Por Material</a></li>
-              </ul>
-            </li>
+            <li><a class="nav-link" href="{{ route('entrada.index') }}">Encomenda</a></li>
           </ul>
         </aside>
       </div>

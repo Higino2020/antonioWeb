@@ -6,7 +6,7 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-header">
-                      <h4>Entradas de Material</h4>
+                      <h4>Entradas de Produtos</h4>
                       
                       <div class="card-header-form">
                         <a href="#Cadastro" data-toggle="modal" title="Cadastrar de uma nova entrada"><i data-feather="plus-circle"></i></a>
@@ -28,8 +28,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nome do Material</th>
-                                <th>Codigo de referencia</th>
+                                <th>Nome do Produto</th>
                                 <th>Quantidade</th>
                                 <th>Categorias</th>
                                 <th>Funcionario</th>
@@ -46,25 +45,18 @@
                                     <td class="p-0 text-center">
                                         {{$i++}}
                                     </td>
-                                    <td>{{$item->material->nome}}</td>
-                                    <td class="align-middle">
-                                        {{$item->material->codigo}}
-                                    </td>
+                                    <td>{{$item->produto->nome}}</td>
                                     <td class="align-middle">
                                         {{$item->qtd}}
                                     </td>
                                     <td>
-                                        {{$item->material->categoria->titulo}}
+                                        {{$item->produto->categoria->nome}}
                                     </td>
                                     <td>
-                                        @if($item->id_funcionario != null )
-                                            {{$item->funcionario->nome}}
-                                        @else
-                                            Admin
-                                        @endif
+                                       {{Auth::user()->nome}}
                                     </td>
                                     <td>
-                                        {{$item->data}}
+                                        {{$item->data_entrada}}
                                     </td>
                                     <td>
                                         <a href="#Cadastro" data-toggle="modal" onclick="editar({{$item}})" class="text-info"><i data-feather="edit"></i></a>
@@ -88,9 +80,9 @@
         function editar(valor) {
             document.getElementById('id').value = valor.id;
             document.getElementById('qtd').value = valor.qtd;
-            document.getElementById('precoUni').value = valor.precoUni;
-            document.getElementById('id_material').value = valor.id_material;
-            document.getElementById('data').value = valor.data;
+            document.getElementById('preco').value = valor.preco;
+            document.getElementById('produto_id').value = valor.produto_id;
+            document.getElementById('data').value = valor.data_entrada;
         }
     </script>
     {{-- Formulairo de cadastro de usuario --}}
@@ -110,7 +102,7 @@
                         <div class="form-group">
                             <label>Produto</label>
                             <div class="input-group">
-                            <select name="id_material" id="id_material" class="form-control">
+                            <select name="produto_id" id="produto_id" class="form-control">
                                 @foreach (App\Models\Produto::orderBy('nome','ASC')->get() as $prod)
                                     <option value="{{ $prod->id }}">{{ $prod->nome }}</option>
                                 @endforeach
@@ -127,7 +119,7 @@
                         <div class="form-group">
                             <label>Preço do Produto</label>
                             <div class="input-group">
-                              <input type="text" required value="0" class="form-control phone-number" name="precoUni" id="precoUni">
+                              <input type="text" required value="0" class="form-control phone-number" name="preco" id="preco">
                             </div>
                         </div>
                         <div class="form-group">

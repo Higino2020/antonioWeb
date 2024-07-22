@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Imagem;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 use Plank\Mediable\Facades\MediaUploader;
@@ -56,7 +57,7 @@ class ProdutoController extends Controller
     public function show( $produto)
     {
         $produto  = Produto::find($produto);
-        return view('',compact('produto'));
+        return view('admin.imagens',compact('produto'));
     }
     public function apagar( $produto)
     {
@@ -69,5 +70,20 @@ class ProdutoController extends Controller
         $produto->estado = $estado;
         $produto->save();
         return redirect()->back()->with('Sucesso','Estado do Produto alterado com sucesso para '.$estado);
+    }
+
+    public function imagens(Request $request){
+        foreach($request->fotos as $foto){
+            $img = new Imagem();
+            //dd($foto);
+            $media = MediaUploader::fromSource($foto)
+                ->toDirectory('produto/img')->onDuplicateIncrement()
+                ->useHashForFilename()
+                ->setAllowedAggregateTypes(['image'])->upload();
+            $img->imagem = $media->basename;
+            $img->produto_id = $request->produto_id;
+            $img->save();
+        }
+        return redirect()->back()->with('Sucesso','Imagens inserida com sucesso');
     }
 }

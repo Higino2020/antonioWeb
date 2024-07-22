@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Encomenda;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EncomendaController extends Controller
 {
@@ -36,8 +37,7 @@ class EncomendaController extends Controller
         }
         $encomenda->qtd = $request->qtd;
         $encomenda->produto_id = $request->produto_id;
-        $encomenda->user_id = $request->user_id;
-        $encomenda->data_entrega = $request->data_entrega;
+        $encomenda->user_id = Auth::user()->id;
         $encomenda->estado = "Em Analise";
         $encomenda->save();
         return redirect()->back()->with('Sucesso','encomenda Inserido com exito');
@@ -51,27 +51,7 @@ class EncomendaController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Encomenda $encomenda)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Encomenda $encomenda)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Encomenda $encomenda)
-    {
-        //
+    public function minhaEncomenda(){
+        return view('pages.encomendas',['encomenda'=>Encomenda::where('user_id',Auth::user()->id)->paginate(10)]);
     }
 }

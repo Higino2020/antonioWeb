@@ -26,14 +26,7 @@
 
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="{{asset('css/style.css')}}"/>
-
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-
+		@stack('css')
     </head>
 	<body>
 		<!-- HEADER -->
@@ -46,10 +39,18 @@
 						<li><a href="#"><i class="fa fa-envelope-o"></i> geral@gmail.com</a></li>
 						<li><a href="#"><i class="fa fa-map-marker"></i> Benguela - Cubal</a></li>
 					</ul>
-					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-dollar"></i> KZ</a></li>
-						<li><a href="#"><i class="fa fa-user-o"></i> Minha Conta</a></li>
-					</ul>
+						
+					@if(!Auth::guest())
+						<ul class="header-links pull-right">
+							<li><a href="{{route('my')}}"><i class="fa fa-user-o"></i> Minha Conta</a></li>
+							<li><a href="{{route('sair')}}"><i class="fa fa-power-off"></i> Sair</a></li>
+						</ul>
+					@else
+						<ul class="header-links pull-right">
+							<li><a href="#Login" data-toggle="modal"> Entrar</a></li>
+							<li><a href="#"> Cadastrar</a></li>
+						</ul>
+					@endif
 				</div>
 			</div>
 			<!-- /TOP HEADER -->
@@ -64,7 +65,7 @@
 						<div class="col-md-2">
 							<div class="header-logo">
 								<a href="{{ route('inicio') }}" class="logo">
-									<img src="{{asset('./img/logo.png')}}" alt="">
+									AS & <span>Filhos</span>
 								</a>
 							</div>
 						</div>
@@ -90,7 +91,7 @@
 						<div class="col-md-2 clearfix">
 							<div class="header-ctn">
 								<!-- Cart -->
-								<div class="dropdown">
+								{{-- <div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Carrinho</span>
@@ -118,7 +119,7 @@
 											<a href="#">Encomendar  <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
-								</div>
+								</div> --}}
 								<!-- /Cart -->
 
 								<!-- Menu Toogle -->
@@ -151,8 +152,6 @@
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="{{route('inicio')}}">Inicio</a></li>
 						<li><a href="{{route('produto')}}">Produtos</a></li>
-						<li><a href="#">Categorias</a></li>
-						<li><a href="#">Verduras</a></li>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -248,7 +247,7 @@
 			<!-- /bottom footer -->
 		</footer>
 		<!-- /FOOTER -->
-
+		@include('pages.auth.login')
 		<!-- jQuery Plugins -->
 		<script src="{{asset('js/jquery.min.js')}}"></script>
 		<script src="{{asset('js/bootstrap.min.js')}}"></script>

@@ -7,12 +7,14 @@ use Plank\Mediable\Media;
 use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\{
+    AuthController,
     CategoriaController,
     ClienteController,
     EncomendaController,
     EntradaController,
     ImagemController,
-    ProdutoController
+    ProdutoController,
+    UserController
 };
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +62,7 @@ Route::get('getfile/{name}',function($name){
 
 
 
-Route::group(['prefix'=>'admin'],function(){
+Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::get('',function(){
         return view('admin.index');
     })->name('admin.inicio');
@@ -68,7 +70,6 @@ Route::group(['prefix'=>'admin'],function(){
     Route::resource('produto', ProdutoController::class);
     Route::resource('cliente', ClienteController::class);
     Route::resource('entrada', EntradaController::class);
-    Route::resource('encomenda', EncomendaController::class);
     Route::resource('categoria', CategoriaController::class);
     Route::resource('imagens', ImagemController::class);
 
@@ -77,7 +78,9 @@ Route::group(['prefix'=>'admin'],function(){
     })->name('perfil');
 
     Route::get('produto/{id}/apagar',[ProdutoController::class,'apagar'])->name('produto.apagar');
-
+    Route::post('produto/img',[ProdutoController::class,'imagens'])->name('produto.img');
+    Route::post('actualizar',[UserController::class,'actualizar'])->name('user.actualizar');
+    Route::post('senha',[UserController::class,'senha'])->name('user.senha');
 });
 
 Route::get('/',function(){
@@ -85,11 +88,18 @@ Route::get('/',function(){
 })->name('inicio');
 
 Route::get('produto',function(){
-    return view('pages.product');
-})->name('produto')->middleware('auth');
+    return view('pages.product',['produto'=>App\Models\Produto::orderBy('id','DESC')->paginate(12)]);
+})->name('produto');
 
+Route::get('produto/{id}/view',function($id){
+    return view('pages.productview',['produto'=>App\Models\Produto::find($id)]);
+})->name('product.view');
 
-
-
+Route::post('entrar',[AuthController::class,'login'])->name('auth');
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('sair',[AuthController::class,'logout'])->name('sair');
+    Route::get('minhaEncomenda',[EncomendaController::class,'minhaEncomenda'])->name('my');
+    Route::resource('encomenda', EncomendaController::class);
+});
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

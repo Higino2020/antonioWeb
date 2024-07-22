@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Entrada;
 use App\Models\Produto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EntradaController extends Controller
 {
@@ -44,17 +45,16 @@ class EntradaController extends Controller
             $produto->save();
         }else{
             $entrada = new Entrada();
-            $produto = Produto::find($request->id_produto);
+            $produto = Produto::find($request->produto_id);
             $produto->qtd = $produto->qtd + $request->qtd;
             $produto->save();
         }
 
         $entrada->qtd = $request->qtd;
-        $entrada->data_entrada = $request->data_entrada;
+        $entrada->data_entrada = $request->data;
         $entrada->descricao = $request->descricao;
         $entrada->produto_id = $request->produto_id;
-        $entrada->user_id = $request->user_id;
-        $entrada->fornecedor_id = $request->fornecedor_id;
+        $entrada->user_id = Auth::user()->id;
         $entrada->preco = $request->preco;
         $entrada->total = $request->preco * $request->qtd;
         $entrada->save();
