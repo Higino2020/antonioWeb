@@ -29,6 +29,7 @@
                                 <th>#</th>
                                 <th>Nome</th>
                                 <th>Email</th>
+                                <th>Tipo</th>
                                 <th></th>
                               </tr>
                         </thead>
@@ -44,6 +45,9 @@
                                     <td>{{$use->name}}</td>
                                     <td>
                                         {{$use->email}}
+                                    </td>
+                                    <td>
+                                        {{$use->tipo}}
                                     </td>
                                     <td>
                                         <a href="#Cadastro" data-toggle="modal" onclick="editar({{$use}})" class="text-info"><i data-feather="edit"></i></a>

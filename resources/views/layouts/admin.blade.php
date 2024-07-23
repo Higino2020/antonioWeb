@@ -78,8 +78,9 @@
               </ul>
             </li>
              @endif --}}
-            
-            <li><a class="nav-link" href="{{route('user.index')}}">Usuario</a></li>
+            @if(Auth::user()->tipo == "Admin")
+              <li><a class="nav-link" href="{{route('user.index')}}">Usuario</a></li>
+            @endif
             <li><a class="nav-link" href="{{route('categoria.index')}}">Categoria</a></li>
             <li><a class="nav-link" href="{{ route('produto.index') }}">Produtos/Serviços</a></li>
             <li><a class="nav-link" href="{{ route('entrada.index') }}">Entradas</a></li>

@@ -99,7 +99,7 @@
             <div class="table-responsive">
               <table class="table table-striped">
                 <tr>
-                  <th>Nome do Material</th>
+                  <th>Nome do produto</th>
                   <th>Codigo de referencia</th>
                   <th>Quantidade</th>
                   <th>Categorias</th>
@@ -108,15 +108,15 @@
                 </tr>
                 @foreach (App\Models\Entrada::whereMonth('data_entrada',date('m'))->get() as $item)
                   <tr>
-                    <td>{{$item->material->nome}}</td>
+                    <td>{{$item->produto->nome}}</td>
                     <td class="align-middle">
-                        {{$item->material->codigo}}
+                        {{$item->produto->codigo}}
                     </td>
                     <td class="align-middle">
                         {{$item->qtd}}
                     </td>
                     <td>
-                        {{$item->material->categoria->titulo}}
+                        {{$item->produto->categoria->titulo}}
                     </td>
                     <td>
                         @if($item->id_funcionario != null )
@@ -130,7 +130,7 @@
                     </td>
                     <td>
                         <a href="#" class="text-info"><i data-feather="edit"></i></a>
-                        <a href="{{route('entradas.show',$item)}}" class="text-danger"><i data-feather="trash"></i></a>
+                        <a href="{{route('entrada.show',$item)}}" class="text-danger"><i data-feather="trash"></i></a>
                     </td>
                 </tr>
                 @endforeach
@@ -178,7 +178,7 @@
               <table class="table table-hover mb-0">
                 <thead>
                   <tr>
-                      <th>Nome do Material</th>
+                      <th>Nome do produto</th>
                       <th>Estado</th>
                       <th>Area requisitante</th>
                       <th>Data da requsição</th>
@@ -187,7 +187,7 @@
                 <tbody>
                   @foreach (App\Models\Saida::whereMonth('data_saida',date('m'))->limit(4)->get() as $item)
                     <tr>
-                      <td>{{$item->material->nome}}</td>
+                      <td>{{$item->produto->nome}}</td>
                       <td class="align-middle">
                           {{$item->qtd}}
                       </td>
